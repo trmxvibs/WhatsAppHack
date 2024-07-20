@@ -1,6 +1,5 @@
-                                                                      #WhatsAppHack
-# Multi-Platform Script
-
+#                                                                      WhatsAppHack
+# WhatsApp Hacking Started.........
 This script provides several functionalities including OTP forwarding, LAN scanning, sending links, using QR codes, Snipear attack, using target IP
 
 ## Features
