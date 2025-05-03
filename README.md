@@ -160,7 +160,7 @@ For Windows, you'll need to use Git Bash or Windows Subsystem for Linux (WSL).
 This script is for educational purposes only. The use of this script for any illegal activities is strictly prohibited. The author is not responsible for any misuse of this script.
 
 ## Author
-- YouTube Channel: [Termux Vibes](https://www.youtube.com/@TermuxVibes)
+- YouTube Channel: [Termux Vibes](https://www.youtube.com/@Termux2)
 
 ## License
 This project is licensed under the MIT License.
