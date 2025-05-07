@@ -28,7 +28,7 @@ This script provides several functionalities including OTP forwarding, LAN scann
 7. **(YouTube Channel)**
    - Redirects you to the author's YouTube channel.
    - Offers 24/7 service available for educational content and tutorials.
-   - YouTube Channel: [Termux Vibes](https://www.youtube.com/@TermuxVibes)
+   - YouTube Channel: [Termux Vibes](https://www.youtube.com/@Termux2)
 
 ## Key Rules
 - Script Need a key to start it. **(Updating soon....)**
