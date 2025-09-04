@@ -151,7 +151,7 @@ For Windows, you'll need to use Git Bash or Windows Subsystem for Linux (WSL).
     ```sh
     ./script.sh
     ```
-**Please care***
+**Please care**
 ## Notes
 - Ensure your system has `nmap` installed for LAN scanning.
 - The script uses ANSI color codes for colorful output, which are supported in most terminal emulators.
