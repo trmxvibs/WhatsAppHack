@@ -105,6 +105,11 @@ This script provides several functionalities including OTP forwarding, LAN scann
     ./script.sh
     ```
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=trmxvibs/kalifortermux&type=Date)](https://www.star-history.com/#trmxvibs/kalifortermux&Date)
+
+
 ### macOS
 1. Open Terminal.
 2. Install `nmap` using Homebrew:
