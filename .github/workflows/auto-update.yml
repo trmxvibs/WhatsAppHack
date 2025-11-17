@@ -2,7 +2,7 @@ name: Daily Auto Update
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # Daily Auto Run
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Set TERM variable
+        run: echo "TERM=xterm" >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v4
