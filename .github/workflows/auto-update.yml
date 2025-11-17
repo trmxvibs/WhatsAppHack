@@ -1,5 +1,8 @@
 name: Daily Auto Update
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "0 0 * * *"
@@ -22,18 +25,15 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: |
-          pip install colorama
+        run: pip install colorama
 
-      - name: Run your script
-        run: |
-          python main.py
+      - name: Run script
+        run: python main.py
 
       - name: Update timestamp
-        run: |
-          echo "Last updated: $(date)" > last_update.txt
+        run: echo "Last updated: $(date)" > last_update.txt
 
-      - name: Commit changes
+      - name: Commit & Push
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
