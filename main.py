@@ -1,65 +1,84 @@
 # Python code
 
-import subprocess
-import sys
 import os
 import time
-from colorama import init, Fore, Style
+import subprocess
+import sys
 
-def install_colorama():
-    print("colorama is not installed. Installing...")
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'colorama'])
-
+# Try importing colorama
 try:
-    import colorama
+    from colorama import init, Fore, Style
 except ImportError:
-    install_colorama()
-    import colorama
+    # Install automatically if colorama not found
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "colorama"])
+    from colorama import init, Fore, Style
 
-# Initialize Colorama
+# Initialize colorama
 init(autoreset=True)
 
-# Clear screen function
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
-# Colors
-colors = [
+# Detect if running inside GitHub Actions
+def is_github_actions():
+    return os.environ.get("GITHUB_ACTIONS") == "true"
+
+
+# Clear screen only if local PC
+def clear_screen():
+    if not is_github_actions():
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+
+# Colors list
+COLORS = [
     Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE,
     Fore.MAGENTA, Fore.CYAN, Fore.WHITE
 ]
 
-# Blinking banner
-def display_blinking_message():
-    banner = """
+# Banner text
+BANNER = """
  ██████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗███╗   ██╗ ██████╗     ███████╗ ██████╗  ██████╗ ███╗   ██╗
 ██╔════╝██╔═══██╗████╗ ████║██║████╗  ██║████╗  ██║██╔═══██╗    ██╔════╝██╔═══██╗██╔═══██╗████╗  ██║
 ██║     ██║   ██║██╔████╔██║██║██╔██╗ ██║██╔██╗ ██║██║   ██║    ███████╗██║   ██║██║   ██║██╔██╗ ██║
 ██║     ██║   ██║██║╚██╔╝██║██║██║╚██╗██║██║╚██╗██║██║   ██║    ╚════██║██║   ██║██║   ██║██║╚██╗██║
 ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██║ ╚████║╚██████╔╝    ███████║╚██████╔╝╚██████╔╝██║ ╚████║
  ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝ ╚═════╝     ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝
-    """
+"""
 
+
+# Blinking banner
+def show_banner():
+    # If running inside GitHub → no animation
+    if is_github_actions():
+        clear_screen()
+        print(BANNER)
+        return
+
+    # Local PC → full blinking animation
     try:
         while True:
-            for color in colors:
+            for c in COLORS:
                 clear_screen()
-                print(color + Style.BRIGHT + banner + Style.RESET_ALL)
+                print(c + Style.BRIGHT + BANNER)
                 time.sleep(0.5)
     except KeyboardInterrupt:
         clear_screen()
-        print(Fore.GREEN + "Banner display terminated." + Style.RESET_ALL)
+        print(Fore.GREEN + "Banner display stopped.")
 
-# Fake loading screen
-def fake_loading_screen():
-    loading_message = "Initializing..."
+
+# Fake loading (only local)
+def fake_loading():
+    if is_github_actions():
+        return  # Skip loading animation in GitHub
+
     clear_screen()
-    print(Fore.GREEN + Style.BRIGHT + loading_message + Style.RESET_ALL)
+    print(Fore.GREEN + "Initializing...")
     for i in range(5):
-        print(Fore.GREEN + Style.BRIGHT + "." * (i + 1) + Style.RESET_ALL, end="\r")
+        print("." * (i + 1), end="\r")
         time.sleep(1)
     clear_screen()
 
+
+# MAIN ENTRY
 if __name__ == "__main__":
-    fake_loading_screen()
-    display_blinking_message()
+    fake_loading()
+    show_banner()
