@@ -1,41 +1,32 @@
 name: Daily Auto Update
 
-# 1. 'on' section: कब चलना है
 on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
 
-# 2. 'jobs' section: क्या काम करना है
 jobs:
   auto_update:
     runs-on: ubuntu-latest
     steps:
-      # (यह स्टेप जरूरी है ताकि एक्शन आपके कोड को एक्सेस कर सके)
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # (आपके पायथन स्क्रिप्ट के लिए सेटअप)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      
       - name: Install dependencies
         run: pip install colorama
-      
       - name: Run script
         run: python main.py
 
-      # (यह स्टेप पहले जैसा ही है - यह फ़ाइल को बदलता है)
-      - name: Update timestamp
-        run: echo "Last updated: $(date)" > last_update.txt
+      - name: Update README
+        run: |
+          sed -i "s/Last updated: /Last updated: $(date)/g" README.md
 
-      # (यह है नया और आसान तरीका - यह अपने आप कमिट कर देगा)
       - name: Commit and Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          # यहाँ वह मैसेज है जो आप कमिट में दिखाना चाहते हैं
-          commit_message: "Auto update: Daily activity"
-          # यह पक्का करता है कि सिर्फ बदली हुई फाइलें ही ऐड हों
-          file_pattern: last_update.txt
+          commit_message: "Auto update: README"
+          file_pattern: README.md
