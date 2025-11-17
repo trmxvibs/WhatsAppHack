@@ -1,0 +1,35 @@
+name: Daily Auto Update
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # रोज़ रात 12 बजे (UTC) auto-run
+  workflow_dispatch:     # Manual run button भी मिलेगा
+
+jobs:
+  auto_update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run your script
+        run: |
+          python main.py   
+
+      - name: Update timestamp file
+        run: |
+          echo "Last updated on: $(date)" > last_update.txt
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Auto update: $(date)" || echo "No changes to commit"
+          git push
