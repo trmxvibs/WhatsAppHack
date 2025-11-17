@@ -2,8 +2,8 @@ name: Daily Auto Update
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # रोज़ रात 12 बजे (UTC) auto-run
-  workflow_dispatch:     # Manual run button भी मिलेगा
+    - cron: "0 0 * * *"   
+  workflow_dispatch:     
 
 jobs:
   auto_update:
