@@ -169,3 +169,5 @@ This script is for educational purposes only. The use of this script for any ill
 
 ## License
 This project is licensed under the MIT License.
+**Last updated:** ```
+
